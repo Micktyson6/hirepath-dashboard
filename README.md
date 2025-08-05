@@ -152,7 +152,7 @@ graph TB
 ### 1. Clone & Install
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Yaser-123/hirepath-dashboard
 cd candidate-management-system
 
 # Install dependencies
