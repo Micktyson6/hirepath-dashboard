@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 import * as dotenv from 'dotenv';
 import candidatesRouter from './routes/candidates.js';
 
@@ -26,15 +27,25 @@ app.get('/health', (_req: express.Request, res: express.Response) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// Serve static files from dist in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('dist'));
+  
+  // Catch all handler for SPA
+  app.get('*', (_req: express.Request, res: express.Response) => {
+    res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+  });
+} else {
+  // Catch-all handler for development
+  app.use('*', (_req: express.Request, res: express.Response) => {
+    res.status(404).json({ error: 'Route not found' });
+  });
+}
+
 // Error handling middleware
-app.use((err: Error, _req: express.Request, res: express.Response) => {
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
-});
-
-// Catch-all handler
-app.use('*', (_req: express.Request, res: express.Response) => {
-  res.status(404).json({ error: 'Route not found' });
 });
 
 app.listen(PORT, () => {
