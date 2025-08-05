@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/candidates', candidatesRouter);
 
 // Health check endpoint
-app.get('/health', (_req, res) => {
+app.get('/health', (_req: express.Request, res: express.Response) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
@@ -33,7 +33,7 @@ app.use((err: Error, _req: express.Request, res: express.Response) => {
 });
 
 // Catch-all handler
-app.use('*', (_req, res) => {
+app.use('*', (_req: express.Request, res: express.Response) => {
   res.status(404).json({ error: 'Route not found' });
 });
 

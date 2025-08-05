@@ -4,14 +4,16 @@
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "types": ["node"]
+    "types": ["node"],
+    "noImplicitAny": false,
+    "allowJs": true
   },
   "include": [
     "src/server.ts",
