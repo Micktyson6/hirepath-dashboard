@@ -146,6 +146,125 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
+// GET /api/candidates/stats - Get statistics (MUST be before /:id route)
+router.get('/stats/overview', async (req: Request, res: Response) => {
+  try {
+    const [total] = await db.select({ count: sql`count(*)` }).from(candidates);
+    
+    const [active] = await db
+      .select({ count: sql`count(*)` })
+      .from(candidates)
+      .where(eq(candidates.status, 'active'));
+    
+    const [inactive] = await db
+      .select({ count: sql`count(*)` })
+      .from(candidates)
+      .where(eq(candidates.status, 'inactive'));
+    
+    const [archived] = await db
+      .select({ count: sql`count(*)` })
+      .from(candidates)
+      .where(eq(candidates.status, 'archived'));
+
+    const [avgExperience] = await db
+      .select({ avg: sql`avg(experience)` })
+      .from(candidates);
+
+    res.json({
+      total: parseInt(total.count as string),
+      active: parseInt(active.count as string),
+      inactive: parseInt(inactive.count as string),
+      archived: parseInt(archived.count as string),
+      averageExperience: parseFloat(avgExperience.avg as string) || 0
+    });
+  } catch (error) {
+    console.error('Error fetching stats:', error);
+    res.status(500).json({ error: 'Failed to fetch statistics' });
+  }
+});
+
+// GET /api/candidates/stats - Get simplified statistics
+router.get('/stats', async (req: Request, res: Response) => {
+  try {
+    const [total] = await db.select({ count: sql`count(*)` }).from(candidates);
+    
+    const [active] = await db
+      .select({ count: sql`count(*)` })
+      .from(candidates)
+      .where(eq(candidates.status, 'active'));
+    
+    const [archived] = await db
+      .select({ count: sql`count(*)` })
+      .from(candidates)
+      .where(eq(candidates.status, 'archived'));
+
+    const [avgExperience] = await db
+      .select({ avg: sql`avg(experience)` })
+      .from(candidates);
+
+    res.json({
+      total: parseInt(total.count as string),
+      active: parseInt(active.count as string),
+      archived: parseInt(archived.count as string),
+      averageExperience: parseFloat(avgExperience.avg as string) || 0
+    });
+  } catch (error) {
+    console.error('Error fetching stats:', error);
+    res.status(500).json({ error: 'Failed to fetch statistics' });
+  }
+});
+
+// POST /api/candidates/bulk - Bulk operations (MUST be before /:id route)
+router.post('/bulk', async (req: Request, res: Response) => {
+  try {
+    const { action, ids, data } = req.body;
+
+    if (!action || !ids || !Array.isArray(ids)) {
+      return res.status(400).json({ error: 'Action and ids array are required' });
+    }
+
+    switch (action) {
+      case 'delete':
+        await db.delete(candidates).where(inArray(candidates.id, ids));
+        res.json({ message: `${ids.length} candidates deleted successfully` });
+        break;
+
+      case 'update_status':
+        if (!data?.status) {
+          return res.status(400).json({ error: 'Status is required for bulk update' });
+        }
+        await db
+          .update(candidates)
+          .set({ status: data.status, updatedAt: new Date() })
+          .where(inArray(candidates.id, ids));
+        res.json({ message: `${ids.length} candidates updated successfully` });
+        break;
+
+      case 'archive':
+        await db
+          .update(candidates)
+          .set({ status: 'archived', updatedAt: new Date() })
+          .where(inArray(candidates.id, ids));
+        res.json({ message: `${ids.length} candidates archived successfully` });
+        break;
+
+      case 'unarchive':
+        await db
+          .update(candidates)
+          .set({ status: 'active', updatedAt: new Date() })
+          .where(inArray(candidates.id, ids));
+        res.json({ message: `${ids.length} candidates unarchived successfully` });
+        break;
+
+      default:
+        res.status(400).json({ error: 'Invalid bulk action' });
+    }
+  } catch (error) {
+    console.error('Error in bulk operation:', error);
+    res.status(500).json({ error: 'Failed to perform bulk operation' });
+  }
+});
+
 // GET /api/candidates/:id - Get single candidate
 router.get('/:id', async (req: Request, res: Response) => {
   try {
@@ -310,43 +429,6 @@ router.post('/bulk', async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error in bulk operation:', error);
     res.status(500).json({ error: 'Failed to perform bulk operation' });
-  }
-});
-
-// GET /api/candidates/stats - Get statistics
-router.get('/stats/overview', async (req: Request, res: Response) => {
-  try {
-    const [total] = await db.select({ count: sql`count(*)` }).from(candidates);
-    
-    const [active] = await db
-      .select({ count: sql`count(*)` })
-      .from(candidates)
-      .where(eq(candidates.status, 'active'));
-    
-    const [inactive] = await db
-      .select({ count: sql`count(*)` })
-      .from(candidates)
-      .where(eq(candidates.status, 'inactive'));
-    
-    const [archived] = await db
-      .select({ count: sql`count(*)` })
-      .from(candidates)
-      .where(eq(candidates.status, 'archived'));
-
-    const [avgExperience] = await db
-      .select({ avg: sql`avg(experience)` })
-      .from(candidates);
-
-    res.json({
-      total: parseInt(total.count as string),
-      active: parseInt(active.count as string),
-      inactive: parseInt(inactive.count as string),
-      archived: parseInt(archived.count as string),
-      averageExperience: parseFloat(avgExperience.avg as string) || 0
-    });
-  } catch (error) {
-    console.error('Error fetching stats:', error);
-    res.status(500).json({ error: 'Failed to fetch statistics' });
   }
 });
 

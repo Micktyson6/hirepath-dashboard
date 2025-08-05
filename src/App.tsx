@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Plus, Edit, Trash2, Users, Archive, Filter } from 'lucide-react';
 
 interface Candidate {
@@ -21,14 +21,14 @@ interface Stats {
   averageExperience: number;
 }
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = import.meta.env.MODE === 'production' 
+  ? 'https://hirepath-dashboard.onrender.com/api'
+  : 'http://localhost:3001/api';
 
 function App() {
   const [viewCandidate, setViewCandidate] = useState<Candidate | null>(null);
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedCandidates, setSelectedCandidates] = useState<string[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -44,26 +44,29 @@ function App() {
     notes: ''
   });
 
-  const fetchCandidates = async (page = 1) => {
+  // Fetch candidates from API with pagination
+  const fetchCandidates = useCallback(async (page: number = 1, statusFilter: string = 'all') => {
     try {
-      setLoading(true);
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: '10',
-        search: searchTerm,
-        status: statusFilter
-      });
-      const response = await fetch(`${API_URL}/candidates?${params}`);
+      const response = await fetch(`${API_URL}/candidates?page=${page}&limit=5&status=${statusFilter}`);
       const data = await response.json();
-      setCandidates(data.data);
-      setTotalPages(data.pagination.totalPages);
-      setCurrentPage(data.pagination.page);
+      
+      // Handle the new API response format
+      setCandidates(data.data || []);
+      setTotalPages(data.pagination?.totalPages || 1);
+      setCurrentPage(data.pagination?.page || 1);
+      
+      // Fetch stats
+      const statsResponse = await fetch(`${API_URL}/candidates/stats`);
+      const stats = await statsResponse.json();
+      setStats(stats);
     } catch (error) {
       console.error('Error fetching candidates:', error);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchCandidates(currentPage, statusFilter);
+  }, [fetchCandidates, currentPage, statusFilter]);
 
   const fetchStats = async () => {
     try {
@@ -78,7 +81,7 @@ function App() {
   useEffect(() => {
     fetchCandidates();
     fetchStats();
-  }, [searchTerm, statusFilter]);
+  }, [fetchCandidates, statusFilter]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -228,8 +231,8 @@ function App() {
               </div>
             </div>
           )}
-          {/* Candidate Table or Loader */}
-          {loading ? (
+          {/* Candidate Table */}
+          {!candidates.length ? (
             <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
               <p className="mt-4 text-gray-600">Loading candidates...</p>
